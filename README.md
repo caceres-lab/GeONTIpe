@@ -101,7 +101,7 @@ If you have the mapping files in a local directory or perform them with workflow
   - Parameter local:"Y"
   - Parameter ftp_route:"X" 
 
-However, if you wish to work from an mapping files located in FTPs:
+However, if you wish to work from mapping files located in FTPs:
   - Parameter local:"N"
   - Parameter ftp_route:"/route/ftp" (The mapping files must have the following naming convention: individual.bam; If this is not possible, you can modify the script located at Scripts/Genotyping_scripts/runall.sh to adapt the naming)
 
