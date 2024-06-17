@@ -35,16 +35,14 @@ If the mapped files are already available, either locally or on an FTP server, a
 All these outputs should be placed in the Infor directory, and all necessary references in Infor/Reference.
 
 ## Output
-If you decide to execute the entire workflow, multiple files will be generated throughout each step. To track the workflow steps, you can enter the tracking_pipeline directory, where files for each output will be created. The main outputs will be found in the Genotyping directory and in the directories of each analyzed sample.
+To track the workflow steps, you can enter the tracking_pipeline directory, where files for each step will be created. The main outputs will be found in the Genotyping directory and in the directories of each analyzed sample.
 
 In the Genotyping directory, for each analyzed inversion, you will find all the generated probes. Note that if fewer than three probes are found, the specific directory for that inversion will not be created. This information can be checked in tracking_pipeline/created_probes.txt.
 
 Within each individual’s directory, there will again be a Genotyping directory, containing each inversion in its own directory. Inside each inversion directory, you will find:
-
-inversion.png: An image displaying the reads and the generated probes.
-inversion_Genotype.txt: A file with information on each read and its respective genotype.
+  - Inversion.png: An image displaying the reads and the generated probes.
+  - Inversion_Genotype.txt: A file with information on each read and its respective genotype.
 Both outputs are shown here as examples.
-
 
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
