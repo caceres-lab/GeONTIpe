@@ -1,14 +1,14 @@
 # GeONType
-A Snakemake workflow for genotype inversions and discovery of structural variants using Oxford Nanopore Long Reads 
+A Snakemake workflow to genotype inversions and to discover structural variants using Oxford Nanopore Long Reads 
 
 ## Pipeline Overview
-GeONType is a Snakemake workflow that consists of various steps starting from downloading to genotyping inversions mediated by inverted repeats using Oxford Nanopore long reads. The pipeline consists of different steps performed by various software and also by custom scripts. The basic concept in genotyping is capturing reads that span the breakpoints of the inversions while characterizing the orientation by blasting probes. 
+GeONType is a Snakemake workflow that consists of various steps starting from downloading to genotyping inversions mediated by inverted repeats using Oxford Nanopore long reads. The pipeline consists of different steps performed by various software and multiple custom scripts. The basic concept in genotyping is capturing reads that span the breakpoints of the inversions while characterizing the orientation by blasting probes. 
 Despite the pipeline's initial purpose, it can also be used for:
   - Genotyping inversions not mediated by inverted repeats
   - Using PacBio reads (adjusting parameters to improve performance)
   - Using assemblies (adjusting parameters to improve performance)
 
-For the proper functioning of this workflow, a config.yaml file is included for users to adjust each parameter, as well as a yml file for use with conda, which includes all the necessary software. The pipeline can be used complete or only one section depending if you need to download to mapp your reads or only to genotype inversions. 
+For the proper functioning of this workflow, a config.yaml file is included for users to adjust each parameter, as well as a yml file for use with conda, which includes all the necessary software. The pipeline can be used complete or only one section depending on if you need to download to map your reads or only to genotype inversions. 
 
 ## Installation
 To run snakefile locally you must have execute:
@@ -20,17 +20,14 @@ conda activate Inversiones
 ```
 ## Inputs
 In case the complete pipeline needs to be executed (from downloading to genotype), the inputs are as follows:
-  - allcoords.txt: This file specifies the inversions to be tested. The separator for each column must be a tab and should include the following information: Inv_ID chromosome BP1_start BP1_end BP2_start BP2_end (chromosome should be 1,2,...,X,Y).
+  - allcoords.txt: This file specifies the inversions to be tested. The separator for each column must be a tab and include the following information: Inv_ID chromosome BP1_start BP1_end BP2_start BP2_end (chromosome should be 1,2,...,X,Y).
   - ListaTodos.txt: This file contains all individuals with their respective URLs for downloading the necessary data in fastq or fasta format. It must be tab-separated with the format: Individual URL (If there are multiple URLs per individual, each URL should be associated with the same individual).
   - gender: This file provides the sex of each sample, separated by a tab: Sample sex (Women/Men).
   - conversion.txt: A file for converting chromosome names in the following style: chr1, chr2... (This can be modified depending on the reference genome used and the chromosome names it provides).
-  - References: Std_ref.fa (reference genome to use, e.g., hg38), t2t_ref.fa (T2T or other reference genome), and All_snp.vcf.gz (SNPs to be used for verification). The names and paths can be modified in the config.yaml, although it is recommended to at least keep the path to avoid possible issues.
+  - References: Std_ref.fa (reference genome to use, e.g., hg38), t2t_ref.fa (T2T or other secondary reference genome), and All_snp.vcf.gz (SNPs used in the analysis).
 
-If the mapped files are already available, either locally or on an FTP server, allcoords.txt and ListaTodos.txt are not required, but we must have:
-  - Individuals.txt: If mapping is not necessary, ListaTodos.txt can be replaced by this file, which lists all the samples to be tested.
-  - gender: This file provides the sex of each sample, separated by a tab: Sample sex (Women/Men).
-  - conversion.txt: A file for converting chromosome names in the following style: chr1, chr2... (This can be modified depending on the reference genome used and the chromosome names it provides).
-  - References: Std_ref.fa (reference genome to use, e.g., hg38), t2t_ref.fa (T2T or other reference genome), and All_snp.vcf.gz (SNPs to be used for verification). The names and paths can be modified in the config.yaml, although it is recommended to at least keep the path to avoid possible issues.
+If the mapped files are already available, either locally or on an FTP server, allcoords.txt and ListaTodos.txt are not required, but we must have in substituion:
+  - Individuals.txt: List of all the samples to be tested.
 
 All these outputs should be placed in the Infor directory, and all necessary references in Infor/Reference.
 
