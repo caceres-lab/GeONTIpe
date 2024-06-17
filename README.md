@@ -26,17 +26,17 @@ In case the complete pipeline needs to be executed (from downloading to genotype
   - conversion.txt: A file for converting chromosome names in the following style: chr1, chr2... (This can be modified depending on the reference genome used and the chromosome names it provides).
   - References: Std_ref.fa (reference genome to use, e.g., hg38), t2t_ref.fa (T2T or other secondary reference genome), and All_snp.vcf.gz (SNPs used in the analysis).
 
-If the mapped files are already available, either locally or on an FTP server, allcoords.txt and ListaTodos.txt are not required, but we must have in substituion:
+If the mapped files are already available, either locally or on an FTP server, allcoords.txt and ListaTodos.txt are not required but must be exchanged by:
   - Individuals.txt: List of all the samples to be tested.
 
-All these outputs should be placed in the Infor directory, and all necessary references in Infor/Reference.
+All these outputs should be placed in the Infor directory and all necessary references in Infor/Reference.
 
 ## Output
-To track the workflow steps, you can enter the tracking_pipeline directory, where files for each step will be created. The main outputs will be found in the Genotyping directory and in the directories of each analyzed sample.
+To track the workflow steps, you can enter the tracking_pipeline directory, where files for each step will be created. The main outputs will be found in the Genotyping directory and the directories of each analyzed sample.
 
 In the Genotyping directory, for each analyzed inversion, you will find all the generated probes. Note that if fewer than three probes are found, the specific directory for that inversion will not be created. This information can be checked in tracking_pipeline/created_probes.txt.
 
-Within each individual’s directory, there will again be a Genotyping directory, containing each inversion in its own directory. Inside each inversion directory, you will find:
+Within each individual’s directory, there will again be a Genotyping directory, containing each inversion in its directory. Inside each inversion directory, you will find:
   - Inversion.png: An image displaying the reads and the generated probes.
   - Inversion_Genotype.txt: A file with information on each read and its respective genotype.
 Both outputs are shown here as examples.
@@ -112,14 +112,14 @@ snakemake --cores all
 
 ## Notes
 Here is an explanation of the function of some adjustable parameters:
-  - Number_of_splits: This parameter determines into how many fragments each downloaded file will be divided. If you have limited RAM and prefer to launch many jobs simultaneously, it's preferable to increase this number. Conversely, if you have ample RAM, you can set this parameter to 1 to map the entire file without splitting it (Default: 30).
+  - Number_of_splits: This parameter determines how many fragments each downloaded file will be divided. If you have limited RAM and prefer to launch many jobs simultaneously, it's preferable to increase this number. Conversely, if you have ample RAM, you can set this parameter to 1 to map the entire file without splitting it (Default: 30).
   - Quality_reads: Minimum quality threshold required for reads to pass filtering. (Default: 7)
   - Read_length: Minimum desired length of reads in base pairs. (Default: 5000)
   - Kind_reads: Equivalent to the -ax parameter of minimap2. (Default: map-ont)
   - Inversion_detection: Equivalent to the -z parameter of minimap2. (Default: 400,100)
   - SV_detection: Equivalent to the -r parameter of minimap2. (Default: 100,1000)
   - Mapq_filter: Filtering of reads based on mapping quality. (Default: 20)
-  - Flanking_region: Additional sequence added upstream and downstream using the coordinates of the breakpoint as a reference. Higher complexity regions may require more flanking sequence. For high complexity regions a values of 50000-100000 are recomended. For low complex or simple inversions, values of 10000 or less should be enough. (Default: 100000)
+  - Flanking_region: Additional sequence added upstream and downstream using the breakpoint coordinates as a reference. Higher complexity regions may require more flanking sequences. For high-complexity regions a values of 50000-100000 are recommended. For low complex or simple inversions, values of 10000 or less should be enough. (Default: 100000)
   - Extra_region: Additional sequence used to assess the uniqueness of generated probes. Should be adjusted based on read type (e.g., ONT, PacBio Hi-fi). Longer reads require more extra region. (Default: 500000)
   - Size_probes: Size of the generated probes. Adjust based on base quality; higher for low-quality bases (ONT reads) and lower for high-quality bases (PacBio Hi-fi). Range of 100-500 bp for ONT, 100-300 bp for PacBio Hi-fi. (Default: 300)
   - Overlap_probes: Overlap between each tested probe. (Default: 275)
@@ -129,8 +129,8 @@ Here is an explanation of the function of some adjustable parameters:
   - Identity_probe: Parameter -perc_identity for blast. (Default: 85)
   - Major_allele_proportion: Proportion of reads with the same orientation to consider as a unique allele. (Default: 0.95)
   - Minor_allele_proportion: Proportion of reads of the minor allele required to be considered a real allele. (Default: 0.15)
-  - Low_confidence_proportion: Proportion of reads of the minor allele to consider inconclusive genotypes. Used together with Minor_allele_proportion for inconclusive genotype thresholds. If low_confidence_proportion is the same value as minor_allele_proportion, not low confident genotypes will be generated (Default: 0.05)
-  - Difference_respect_expected: Minimum percentage difference to consider an additional structural variant. Higher values are needed for reads with more errors. Recomendations: for ONT, 0.01-0.05 for PacBio Hi-Fi. (Default: 0.05)
+  - Low_confidence_proportion: Proportion of reads of the minor allele to consider inconclusive genotypes. Used together with Minor_allele_proportion for inconclusive genotype thresholds. If low_confidence_proportion is the same value as minor_allele_proportion, not low-confident genotypes will be generated (Default: 0.05)
+  - Difference_respect_expected: Minimum percentage difference to consider an additional structural variant. Higher values are needed for reads with more errors.  Recommendations: for ONT, 0.01-0.05 for PacBio Hi-Fi. (Default: 0.05)
   - Minimum_size_SVs: Minimum size of detection of structural variants. (Default: 100)
   - Ratio_to_split_SV: Percentage difference to determine if two similar found structural variants should be classified as one or two. (Default: 0.1)
   - Quality_by_base: Minimum quality at each base when using samtools mpileup. Higher values extract fewer but more likely correct bases. (Default: 1)
