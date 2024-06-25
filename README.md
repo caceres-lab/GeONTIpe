@@ -67,13 +67,13 @@ To execute the workflow, the first step is to access the config file to modify t
     "Mapq_filter": 20,
     
     ## Creating input to genotypes and probes
-    "flanking_region": 10000,
+    "flanking_region": 100000,
     "extra_region": 500000,
     "size_probes": 300,
-    "overlap_probes": 275,
+    "overlap_probes": 290,
     "seq_ref": "/main/route/Infor/Reference/chm13v2.0.fa",
-    "extra_route": "/scratch/rmoreira/Infor/Reference",
-    "min_uni_seq": 70,
+    "extra_route": "/main/route/Infor/Reference",
+    "min_uni_seq": 50,
 
     ## Genotyping inversions
     "local": "Y",
@@ -84,11 +84,11 @@ To execute the workflow, the first step is to access the config file to modify t
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,
-    "Low_confidence_proportion": 0.05,
+    "Low_confidence_proportion": 0.06,
 
     ## Alternative SVs classification
     "Difference_respect_expected": 0.05,
-    "Minimum_size_SVs": 100,
+    "Minimum_size_SVs": 200,
     "Ratio_to_split_SV": 0.1,
     
     ## SNP analysis
