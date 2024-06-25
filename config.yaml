@@ -1,0 +1,54 @@
+{
+    ## Execution options
+    "option": "genotype",
+
+    ## Directories
+    "directory": "/scratch/rmoreira",
+    "Ref": "/scratch/rmoreira/Infor/Reference/Std_ref.fa",
+    
+    ## Split of files
+    "number_of_splits": 30,
+    
+    ## Filtering reads on statistics
+    "Quality_reads": 7,
+    "Read_length": 5000,
+    
+    ## Mapping of reads
+    "Kind_reads": "map-ont",
+    "Inversion_detection": "400,100",
+    "SV_detection": "100,1000",
+    "Mapq_filter": 20,
+    
+    ## Creating input to genotypes and probes
+    "flanking_region": 20000,
+    "extra_region": 500000,
+    "size_probes": 300,
+    "overlap_probes": 290,
+    "seq_ref": "/scratch/rmoreira/Infor/Reference/chm13v2.0.fa",
+    "extra_route": "/scratch/rmoreira/Infor/Reference",
+    "min_uni_seq": 50,
+
+    ## Genotyping inversions
+    "local": "Y",
+    "ftp_route": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38",
+    "task": "megablast",
+    "coverage_of_probes": 90,
+    "identity_probe": 85,
+
+    ## Genotype classification
+    "Minor_allele_proportion": 0.15,
+    "Low_confidence_proportion": 0.05,
+
+    ## Alternative SVs classification
+    "Difference_respect_expected": 0.05,
+    "Minimum_size_SVs": 100,
+    "Ratio_to_split_SV": 0.1,
+    
+    ## SNP analysis
+    "SNP_selection_route": "/scratch/rmoreira/Infor/Reference/All_snp.vcf.gz",
+    "Quality_by_base": 1,
+    "Min_freq_snps": 0.15,
+    "Min_coverage": 1,
+    "Distance_of_tree": 0.5,
+}
+
