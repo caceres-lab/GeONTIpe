@@ -4,7 +4,7 @@ A Snakemake workflow to genotype inversions and to discover structural variants 
 ## Pipeline Overview
 GeONType is a Snakemake workflow that consists of various steps starting from downloading to genotyping inversions mediated by inverted repeats using Oxford Nanopore long reads. The pipeline consists of different steps performed by various software and multiple custom scripts. The basic concept in genotyping is capturing reads that span the breakpoints of the inversions while characterizing the orientation by blasting probes. 
 Despite the pipeline's initial purpose, it can also be used for:
-  - Genotyping inversions not mediated by inverted repeats
+  - Genotyping inversions not mediated by inverted repeats (creating artificial inverted repeats of 100 bp around the breakpoints of the inversion)
   - Using PacBio reads (adjusting parameters to improve performance)
   - Using assemblies (adjusting parameters to improve performance)
 
@@ -46,6 +46,9 @@ To execute the workflow, the first step is to access the config file to modify t
 
 ```
 {
+    ## Execution options
+    "option": "genotype",
+
     ## Directories
     "directory": "/main/route",
     "Ref": "/main/route/Infor/Reference/Std_ref.fa",
@@ -80,7 +83,6 @@ To execute the workflow, the first step is to access the config file to modify t
     "identity_probe": 85,
 
     ## Genotype classification
-    "Major_allele_proportion": 0.95,
     "Minor_allele_proportion": 0.15,
     "Low_confidence_proportion": 0.05,
 
@@ -112,6 +114,7 @@ snakemake --cores all
 
 ## Notes
 Here is an explanation of the function of some adjustable parameters:
+  - Option: Parameter that determine the steps of the workflow. There're two options, "complete" (complete workflow from download to genotype) and "genotype" (genotype inversions usisng existing bam files)
   - Number_of_splits: This parameter determines how many fragments each downloaded file will be divided. If you have limited RAM and prefer to launch many jobs simultaneously, it's preferable to increase this number. Conversely, if you have ample RAM, you can set this parameter to 1 to map the entire file without splitting it (Default: 30).
   - Quality_reads: Minimum quality threshold required for reads to pass filtering. (Default: 7)
   - Read_length: Minimum desired length of reads in base pairs. (Default: 5000)
