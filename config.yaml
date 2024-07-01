@@ -26,14 +26,14 @@
     "overlap_probes": 290,
     "seq_ref": "/scratch/rmoreira/Infor/Reference/chm13v2.0.fa",
     "extra_route": "/scratch/rmoreira/Infor/Reference",
-    "min_uni_seq": 50,
+    "min_uni_seq": 1,
 
     ## Genotyping inversions
-    "local": "Y",
+    "local": "N",
     "ftp_route": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38",
     "task": "megablast",
     "coverage_of_probes": 90,
-    "identity_probe": 85,
+    "identity_probe": 80,
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,

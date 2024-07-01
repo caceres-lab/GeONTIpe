@@ -19,6 +19,10 @@ rule all:
         f"{direc}/tracking_pipeline/completed_samples.txt",
         f"{direc}/tracking_pipeline/failed_samples.txt",
         "tracking_pipeline/merging_complete.txt",
+        f"{direc}/Infor/probecreation/regions_probes.txt",
+        f"{direc}/tracking_pipeline/windows_ready.txt",
+        f"{direc}/Infor/probecreation/allregions.txt",
+        f"{direc}/Infor/probecreation/generated_probes.txt",
         f"{direc}/tracking_pipeline/created_probes.txt",
         f"{direc}/tracking_pipeline/preparing_genotyping_complete.txt",
         f"{direc}/Infor/ExpectedDistProvesInverted.txt",
@@ -242,26 +246,75 @@ rule preparing_genotyping_inputs:
         done
         """
 
-rule creating_probes:
+rule created_probes_regions:
     input:
-        f"{direc}/Infor/allcoords.txt"
+        cords=f"{direc}/Infor/allcoords.txt"
     output:
-        f"{direc}/tracking_pipeline/created_probes.txt"
-    threads:8
+        f"{direc}/Infor/probecreation/regions_probes.txt"
     params:
         flanking_region=config["flanking_region"],
-        extra_region=config["extra_region"],
+        routes=config["extra_route"]
+    shell:
+        """
+        {direc}/Scripts/step1_probes.sh {params.flanking_region} {params.routes}
+        """
+
+rule creating_probes_creating_windows:
+    input:
+        regions=f"{direc}/Infor/probecreation/regions_probes.txt"
+    output:
+        f"{direc}/tracking_pipeline/windows_ready.txt"
+    threads:8
+    params:
         probe_size=config["size_probes"],
         overlap=config["overlap_probes"],
-        Main_reference=config["Ref"],
-        Secundary_reference=config["seq_ref"],
         routes=config["extra_route"],
         minimum_unique_sequence=config["min_uni_seq"]
     shell:
         """
-        {direc}/Scripts/generating_probes.sh {params.flanking_region} {params.extra_region} {params.probe_size} {params.overlap} {params.Main_reference} {params.Secundary_reference} {params.routes} {params.minimum_unique_sequence}
+        cat {input.regions} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_windows.sh {{}} {params.probe_size} {params.overlap} {params.routes} {params.minimum_unique_sequence}
         """
-        
+
+rule creating_probes_sorting_windows:
+    input:
+        f"{direc}/tracking_pipeline/windows_ready.txt",
+        cords=f"{direc}/Infor/allcoords.txt"
+    output:
+        f"{direc}/Infor/probecreation/allregions.txt"
+    shell:
+        """
+        {direc}/Scripts/sorting_windows.sh
+        """
+
+rule creating_probes:
+    input:
+        f"{direc}/Infor/probecreation/allregions.txt"
+    output:
+        f"{direc}/Infor/probecreation/generated_probes.txt"
+    threads:8
+    params:
+        extra_region=config["extra_region"],
+        Main_reference=config["Ref"],
+        Secundary_reference=config["seq_ref"],
+        routes=config["extra_route"]
+    shell:
+        """
+        makeblastdb -in {params.Main_reference} -dbtype nucl
+        makeblastdb -in {params.Secundary_reference} -dbtype nucl
+        cat {input} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_probes.sh {{}} {params.extra_region} {params.Main_reference} {params.Secundary_reference} {params.routes}
+        """
+
+rule final_probes:
+    input:
+        f"{direc}/Infor/allcoords.txt",
+        f"{direc}/Infor/probecreation/generated_probes.txt"
+    output:
+        f"{direc}/tracking_pipeline/created_probes.txt"
+    shell:
+        """
+        {direc}/Scripts/final_steps.sh
+        """
+
 rule Preparing_genotyping:
     input:
         individuals=f"{direc}/tracking_pipeline/completed_samples.txt",
@@ -298,7 +351,7 @@ rule Genotyping:
         individuals=f"{direc}/tracking_pipeline/completed_samples.txt"
     output:
         f"{direc}/tracking_pipeline/genotyping_complete.txt"
-    threads: 10
+    threads: 8
     params:
         local_analysis=config["local"],
         ftp_location=config["ftp_route"],

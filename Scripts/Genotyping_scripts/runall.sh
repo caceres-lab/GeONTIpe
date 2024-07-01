@@ -16,11 +16,11 @@ elif [ $samplgender == "Men" ];then
 fi
 
 if [ $local == Y ];then
-  if [ -f "$wd/../../../cosas/"$ind"/hg38/FinalMap.bam" ] && [ -f "$wd/../Descargas/Resultados/mappeo/FinalMap.bam" ]; then
-    initBam="$wd/../../../cosas/"$ind"/hg38/FinalMap.bam"
-    initBam2="$wd/../Descargas/Resultados/mappeo/FinalMap.bam"
-  elif [ -f "$wd/../../../cosas/$ind/hg38/FinalMap.bam" ]; then
-    initBam="$wd/../../../cosas/"$ind"/hg38/FinalMap.bam"
+  if [ -f "$wd/../../../cosas/"$ind"/hg38/"$ind".bam" ] && [ -f "$wd/../Descargas/Resultados/mappeo/"$ind".bam" ]; then
+    initBam="$wd/../../../cosas/"$ind"/hg38/"$ind".bam"
+    initBam2="$wd/../Descargas/Resultados/mappeo/"$ind".bam"
+  elif [ -f "$wd/../../../cosas/$ind/hg38/"$ind".bam" ]; then
+    initBam="$wd/../../../cosas/"$ind"/hg38/"$ind".bam"
   else
     initBam="$wd/../Resultados/mappeo/"$ind".bam"
   fi
@@ -48,11 +48,11 @@ do
 
  chr=$(grep "$inv[[:space:]]" $wd/../../Infor/ListaRef.txt | cut -f2 | sed 's/:/\t/g' | cut -f1)
  #chr_name="$(cat $wd/../../Infor/conversion.txt | grep $chr[[:space:]] | cut -f2)"
- chr_name=chr$chr
+ #chr_name=chr$chr
  pos=$(grep "$inv[[:space:]]" $wd/../../Infor/ListaRef.txt | cut -f2 | tr -d "[[:space:]]" | sed 's/:/\t/g' | cut -f2 | tr -d "[[:space:]]")
- selInv=$chr_name:$pos
- selInv2=$chr:$pos
- echo $selInv2 | sed 's/chr//; s/:/\t/g; s/-/\t/g' > $wd/$inv/seqInfo
+ #selInv=$chr_name:$pos
+ selInv=$chr:$pos
+ echo $selInv | sed 's/chr//; s/:/\t/g; s/-/\t/g' > $wd/$inv/seqInfo
   
   ## Extraction of the region from the main file
 
@@ -65,8 +65,12 @@ do
 		samtools view -b $initBam "$selInv" > $wd/$inv/${inv}.bam
 		samtools index $wd/$inv/$inv.bam > $wd/$inv/$inv.bam.bai
 	fi
-
-	## Mapping the reads agains the probes
+  
+  if [ $local == N ];then
+    rm $wd/../../*.cram.crai
+	fi
+  
+  ## Mapping the reads agains the probes
 
 	mkdir -p $wd/$inv/Resultados/SondasMapeadas
 	letras="A B C D"
@@ -165,8 +169,9 @@ do
   
   if [ -f $wd/$inv/temp_SNP.txt ]; then
     echo "Analyzing SNPs of $inv"
-    rm "$wd/$inv/temp_SNP.txt"
+    #rm "$wd/$inv/temp_SNP.txt"
     $wd/snps.sh ${inv} ${2} ${13} ${14} ${15} ${16} ${17} ${18}
+    rm $wd/$inv/Regions
   fi
 
 	rm $wd/$inv/${inv}.bam
@@ -176,4 +181,3 @@ do
   rm $wd/$inv/${inv}DupReads.bam.bai
   rm $wd/$inv/Regions
 done
-

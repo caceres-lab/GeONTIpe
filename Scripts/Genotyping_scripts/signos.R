@@ -433,6 +433,7 @@ Recons$ProbGeno <- NA
 
 ELGENOTIPO <- NA
 ProbGeno <- NA
+SNP = "N"
 
 gt_freq_geno <- table(Recons$SignGT)
 gt_prop_geno <- prop.table(gt_freq_geno)
@@ -503,7 +504,7 @@ handle_genotype_over_5 <- function(gt_prop_geno, Recons, plotable, gender, minor
 
 Det_males <- function(gt_prop_geno, Recons, minor_al) {
   if (length(names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])) == 1) {
-    geno <- names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])
+    geno <- names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])
     prob <- round(1 - (0.5 ^ sum(Recons$SignGT == geno)), digits = 3)
     return(list(ELGENOTIPO = geno, ProbGeno = prob))
   } else {
@@ -512,23 +513,21 @@ Det_males <- function(gt_prop_geno, Recons, minor_al) {
 }
 
 Main_condition <- function(gt_prop_geno, minor_al, min_low_con) {
-  if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] > minor_al) {
-    if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] > minor_al) {
+  if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] >= minor_al) {
+    if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= minor_al) {
       return(list(ELGENOTIPO = "Std/Inv", ProbGeno = 1))
-    } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= min_low_con && gt_prop_geno["Inv"] <= minor_al) {
+    } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= min_low_con && gt_prop_geno["Inv"] < minor_al) {
       return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))
-    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] > minor_al) {
+    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] >= minor_al) {
       return(list(ELGENOTIPO = "Std/AD", ProbGeno = 1))
-    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] >= min_low_con && gt_prop_geno["AD"] <= minor_al) {
-      return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))
-    } else if ("Error" %in% names(gt_prop_geno) && gt_prop_geno["Error"] > minor_al) {
-      return(list(ELGENOTIPO = "Std/Err", ProbGeno = 1))
+    } else if ("Err" %in% names(gt_prop_geno) && gt_prop_geno["Err"] >= minor_al) {
+      return(list(ELGENOTIPO = "Std/Error", ProbGeno = 1))
     } else {
       if (length(Recons$SignGT) <= 4) {
         return(list(ELGENOTIPO = "NER", ProbGeno = NA, SNP = "Y"))
       } else {
-        if (length(names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])) == 1) {
-          geno <- names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])
+        if (length(names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])) == 1) {
+          geno <- names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])
           prob <- round(1 - (0.5 ^ sum(Recons$SignGT == geno)), digits = 3)
           return(list(ELGENOTIPO = geno, ProbGeno = prob))
         } else {
@@ -536,21 +535,19 @@ Main_condition <- function(gt_prop_geno, minor_al, min_low_con) {
         }
       }
     }
-  } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] > minor_al) {
-    if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] >= min_low_con && gt_prop_geno["Std"] <= minor_al) {
+  } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= minor_al) {
+    if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] >= min_low_con && gt_prop_geno["Std"] < minor_al) {
         return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))
-    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] > minor_al) {
+    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] >= minor_al) {
         return(list(ELGENOTIPO = "Inv/AD", ProbGeno = 1))
-    } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] >= min_low_con && gt_prop_geno["AD"] <= minor_al) {
-      return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))  
-    } else if ("Error" %in% names(gt_prop_geno) && gt_prop_geno["Error"] > minor_al) {
-      return(list(ELGENOTIPO = "Std/Err", ProbGeno = 1))
+    } else if ("Err" %in% names(gt_prop_geno) && gt_prop_geno["Err"] >= minor_al) {
+      return(list(ELGENOTIPO = "Inv/Error", ProbGeno = 1))
     } else {
       if (length(Recons$SignGT) <= 4) {
         return(list(ELGENOTIPO = "NER", ProbGeno = NA, SNP = "Y"))
       } else {
-        if (length(names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])) == 1) {
-          geno <- names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])
+        if (length(names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])) == 1) {
+          geno <- names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])
           prob <- round(1 - (0.5 ^ sum(Recons$SignGT == geno)), digits = 3)
           return(list(ELGENOTIPO = geno, ProbGeno = prob))
         } else {
@@ -558,19 +555,25 @@ Main_condition <- function(gt_prop_geno, minor_al, min_low_con) {
         }
       }
     }
-  } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] > minor_al){
-      if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] >= min_low_con && gt_prop_geno["Std"] <= minor_al) {
+  } else if ("AD" %in% names(gt_prop_geno) && gt_prop_geno["AD"] >= minor_al){
+      if ("Std" %in% names(gt_prop_geno) && gt_prop_geno["Std"] >= min_low_con && gt_prop_geno["Std"] < minor_al) {
         return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))
-      } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= min_low_con && gt_prop_geno["Inv"] <= minor_al) {
+      } else if ("Inv" %in% names(gt_prop_geno) && gt_prop_geno["Inv"] >= min_low_con && gt_prop_geno["Inv"] < minor_al) {
           return(list(ELGENOTIPO = "Low_confi", ProbGeno = NA))
-      } else if("Error" %in% names(gt_prop_geno) && gt_prop_geno["Error"] > minor_al) {
-        return(list(ELGENOTIPO = "Std/Err", ProbGeno = 1))
+      } else if("Err" %in% names(gt_prop_geno) && gt_prop_geno["Err"] >= minor_al) {
+        return(list(ELGENOTIPO = "AD/Error", ProbGeno = 1))
       } else {
-        return(list(ELGENOTIPO = "NER", ProbGeno = NA, SNP = "Y"))
+        if (length(names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])) == 1) {
+          geno <- names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])
+          prob <- round(1 - (0.5 ^ sum(Recons$SignGT == geno)), digits = 3)
+          return(list(ELGENOTIPO = geno, ProbGeno = prob))
+        } else {
+          return(list(ELGENOTIPO = "NER", ProbGeno = NA, SNP = "Y"))
+        }
       }
   } else {
-    if (length(names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])) == 1) {
-      geno <- names(gt_prop_geno[gt_prop_geno > (1 - minor_al)])
+    if (length(names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])) == 1) {
+      geno <- names(gt_prop_geno[gt_prop_geno >= (1 - minor_al)])
       prob <- round(1 - (0.5 ^ sum(Recons$SignGT == geno)), digits = 3)
       return(list(ELGENOTIPO = geno, ProbGeno = prob))
     } else {
@@ -578,6 +581,15 @@ Main_condition <- function(gt_prop_geno, minor_al, min_low_con) {
     }
   }
 }
+
+
+print(SNP)
+
+if (SNP == "Y") {
+  write(SNP, file = "temp_SNP.txt")
+}
+
+
 
 result <- determine_genotype(gt_prop_geno, Recons, plotable, gender, minor_al, min_low_con)
 

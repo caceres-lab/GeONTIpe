@@ -35,7 +35,7 @@ else
   then
     chr="Y"
   fi
-  
+
   > $wd/$inv/Regions
   
   A="$(grep "${inv}[[:space:]]" $wd/../../Infor/allcoords.txt | cut -f3)"
@@ -54,7 +54,7 @@ else
   bcftools view -r ${chr}:$D-$pos2 -m2 -M2 -v snps ${elsnp} | grep -v "#" >> $wd/$inv/SNP/snps${inv}.txt
 
 ### See the bases of X quality on the regions selected in map file
-   
+
   samtools mpileup --no-BAQ -f $ref -Q $quality --output-QNAME $initBam > $wd/$inv/SNP/mpileup${inv}.txt
   
 #### Check if sample exists in 1000 Genome project
@@ -76,6 +76,7 @@ elif [ $ind == "HG006" ];then
 elif [ $ind == "HG007" ];then
   ind="NA24695"  
 fi
+
 
 if [[ $(bcftools view -h "http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_raw_GT_with_annot/20201028_CCDG_14151_B01_GRM_WGS_2020-08-05_${chrs}.recalibrated_variants.vcf.gz" | grep -c "${ind}") == 1 ]]; then
   bcftools view -H -r ${chrs}:$pos1-$pos2 -s "${ind}" http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_raw_GT_with_annot/20201028_CCDG_14151_B01_GRM_WGS_2020-08-05_${chrs}.recalibrated_variants.vcf.gz | cut -f2,10 | sed 's/:/\t/g' | cut -f1-2 | grep "0/1" | cut -f1 > $wd/$inv/SNP/snps1000GP${inv}.txt

@@ -4,6 +4,12 @@ wd="$(pwd)"
 
 echo -e "Inv\tDistAC\tDistBD\tDistAB\tDistCD" > $wd/Infor/ExpectedDistProvesInverted.txt
 
+ls $wd/Genotyping | sed 's/ /-r/g' > $wd/Infor/available.txt
+
+cat $wd/Infor/ListaRef.txt | grep -f $wd/Infor/available.txt > $wd/Infor/ListaRef.tmp
+rm $wd/Infor/available.txt
+mv $wd/Infor/ListaRef.tmp $wd/Infor/ListaRef.txt
+
 for i in $(cut -f1 $wd/Infor/ListaRef.txt)
 do
 
