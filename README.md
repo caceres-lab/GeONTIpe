@@ -32,7 +32,7 @@ If you need to execute the entire pipeline (from downloading to genotyping), the
   - All_snp.vcf.gz (SNPs used in the analysis)
 
 ### Inputs for Using Pre-Mapped Files
-If mapped files are already available, either locally or on an FTP server, you do not need allcoords.txt and ListaTodos.txt. Instead, provide:
+If mapped files are already available, either locally or on an FTP server, you do not need ListaTodos.txt. Instead, provide:
   - Individuals.txt: List of all the samples to be tested.
 
 ### Directory Structure
