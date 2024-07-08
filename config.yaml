@@ -1,6 +1,6 @@
 {
     ## Execution options
-    "option": "genotype",
+    "option": "genotype_wt_probes",
 
     ## Directories
     "directory": "/scratch/rmoreira",
@@ -23,15 +23,15 @@
     "flanking_region": 20000,
     "extra_region": 500000,
     "size_probes": 300,
-    "overlap_probes": 290,
+    "overlap_probes": 100,
     "seq_ref": "/scratch/rmoreira/Infor/Reference/chm13v2.0.fa",
     "extra_route": "/scratch/rmoreira/Infor/Reference",
-    "min_uni_seq": 1,
+    "min_uni_seq": 50,
 
     ## Genotyping inversions
     "local": "N",
     "ftp_route": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38",
-    "task": "megablast",
+    "task": "blastn",
     "coverage_of_probes": 90,
     "identity_probe": 80,
 
@@ -41,7 +41,7 @@
 
     ## Alternative SVs classification
     "Difference_respect_expected": 0.05,
-    "Minimum_size_SVs": 100,
+    "Minimum_size_SVs": 200,
     "Ratio_to_split_SV": 0.1,
     
     ## SNP analysis

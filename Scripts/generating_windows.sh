@@ -25,11 +25,11 @@ create_windows() {
         local type=$(echo $region_name | cut -d'_' -f2)
         mkdir -p $wd/Infor/windows/$inversion/$type
 
-        local lower_count=$(echo $window_seq | grep -o '[acgt]' | wc -l)
+        local lower_count=$(echo $window_seq | grep -o '[ACGT]' | wc -l)
         local total_count=${#window_seq}
         local lower_percentage=$((100 * lower_count / total_count))
-
-        if [[ $lower_percentage -lt $minim_rep_seq ]] && [[ $window_seq != *"N"* ]]; then
+            
+        if [[ $lower_percentage -ge $minim_rep_seq ]] && [[ $window_seq != *"N"* ]]; then
             echo ">${window_name}" > $wd/Infor/windows/$inversion/$type/window_${window_name}.fasta
             echo $window_seq >> $wd/Infor/windows/$inversion/$type/window_${window_name}.fasta
         fi

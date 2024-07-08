@@ -52,7 +52,12 @@ do
      regionA="$startA-$endA"
      echo -e "${region}_A\t$chr\t$regionA" >> $wd/Infor/probecreation/regions_probes.txt
 
-     if [ $invsize -le $merging_BC ];then
+     if [ $invsize -le 500 ];then
+       startB="$(cat $wd/Infor/allcoords.txt | grep ${region}[[:space:]] | cut -f4)"
+       endB="$(cat $wd/Infor/allcoords.txt | grep ${region}[[:space:]] | cut -f5)"
+       regionB="$startB-$endB"
+       echo -e "${region}_B\t$chr\t$regionB" >> $wd/Infor/probecreation/regions_probes.txt
+     elif [ $invsize -le $merging_BC ];then
          startB="$(cat $wd/Infor/allcoords.txt | grep ${region}[[:space:]] | cut -f4)"
          newinv_size=$((invsize/2))
          endB="$((startB + newinv_size))"

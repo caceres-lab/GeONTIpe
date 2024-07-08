@@ -1,17 +1,3 @@
-#!/usr/bin/Rscript
-
-#repos <- "https://cran.rstudio.com"
-#packages <- c("ggplot2")
-#
-#for (pkg in packages) {
-#  if (!requireNamespace(pkg, quietly = TRUE)) {
-#    install.packages(pkg, repos = repos, dependencies = TRUE)
-#    library(pkg, character.only = TRUE)
-#  } else {
-#    library(pkg, character.only = TRUE)
-#  }
-#}
-
 library(ggplot2)
 
 inputs <- commandArgs(T)
@@ -25,7 +11,7 @@ low_con <- as.numeric(inputs[5])
 diff_exp <- as.numeric(inputs[6])
 min_sv <- as.numeric(inputs[7])
 splitting_svs <- as.numeric(inputs[8])
-
+ 
 setwd(paste(inputs[1], inv, sep = "/"))
 
 ## Read all files
@@ -433,7 +419,7 @@ Recons$ProbGeno <- NA
 
 ELGENOTIPO <- NA
 ProbGeno <- NA
-SNP = "N"
+SNP <- NA
 
 gt_freq_geno <- table(Recons$SignGT)
 gt_prop_geno <- prop.table(gt_freq_geno)
@@ -582,19 +568,15 @@ Main_condition <- function(gt_prop_geno, minor_al, min_low_con) {
   }
 }
 
-
-print(SNP)
-
-if (SNP == "Y") {
-  write(SNP, file = "temp_SNP.txt")
-}
-
-
-
 result <- determine_genotype(gt_prop_geno, Recons, plotable, gender, minor_al, min_low_con)
 
 ELGENOTIPO <- result$ELGENOTIPO
 ProbGeno <- result$ProbGeno
+SNP <- result$SNP
+
+if (!is.null(SNP)) {
+  write(SNP, file = "temp_SNP.txt")
+}
   
 FGeno <- as.data.frame(matrix(c("FinalGenotype", ELGENOTIPO, NA, ProbGeno), nrow = 1))
 colnames(FGeno) <- colnames(Recons)

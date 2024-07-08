@@ -3,17 +3,20 @@
 wd="$1"
 
 invs="$(cut -f1 $wd/../../Infor/ListaRef.txt)"
+
 ind=$2
 local=$3
 route=$4
 
-samplgender="$(cat $wd/../../Infor/gender | grep $ind[[:space:]] | cut -f2)"
+samplgender="$(cat $wd/../../Infor/gender | grep $ind[[:space:]] | cut -f2 | tr -d '\r')"
 
 if [ $samplgender == "Women" ];then
   gender="W"
 elif [ $samplgender == "Men" ];then
   gender="M"
 fi
+
+echo ${gender}
 
 if [ $local == Y ];then
   if [ -f "$wd/../../../cosas/"$ind"/hg38/"$ind".bam" ] && [ -f "$wd/../Descargas/Resultados/mappeo/"$ind".bam" ]; then
@@ -31,13 +34,11 @@ fi
 for inv in $invs
 do
 
-  if [ -f $wd/$inv/${inv}.png ] && [ -d $wd/$inv/Resultados ]
-	then
+  if [ -f $wd/$inv/${inv}.png ] && [ -d $wd/$inv/Resultados ];then
 		continue
   fi
   
-  if [ ! -f $wd/$inv/${inv}.png ] && [ -d $wd/$inv/Resultados ]
-    then
+  if [ ! -f $wd/$inv/${inv}.png ] && [ -d $wd/$inv/Resultados ] && [ -s $wd/$inv/Resultados/MapInfo ]; then
     Rscript $wd/signos.R ${wd} ${inv} ${gender} ${8} ${9} ${10} ${11} ${12}
     continue
 	fi
@@ -52,7 +53,7 @@ do
  pos=$(grep "$inv[[:space:]]" $wd/../../Infor/ListaRef.txt | cut -f2 | tr -d "[[:space:]]" | sed 's/:/\t/g' | cut -f2 | tr -d "[[:space:]]")
  #selInv=$chr_name:$pos
  selInv=$chr:$pos
- echo $selInv | sed 's/chr//; s/:/\t/g; s/-/\t/g' > $wd/$inv/seqInfo
+ echo $selInv | sed 's/chr//; s/:/\t/g; s/-/\t/g' | sed 's/Y/24/g' | sed 's/X/23/g' > $wd/$inv/seqInfo
   
   ## Extraction of the region from the main file
 
@@ -164,7 +165,7 @@ do
 
 	echo "Analyzing BLAST of $inv"
 	$wd/anBlast.sh ${wd} ${inv} ${5} ${6} ${7}
-     
+
   Rscript $wd/signos.R $wd ${inv} ${gender} ${8} ${9} ${10} ${11} ${12}
   
   if [ -f $wd/$inv/temp_SNP.txt ]; then

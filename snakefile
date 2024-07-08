@@ -193,11 +193,108 @@ def set2_rules():
             touch {output[6]}
             """
 
+    rule created_probes_regions:
+        input:
+            cords=f"{direc}/Infor/allcoords.txt"
+        output:
+            f"{direc}/Infor/probecreation/regions_probes.txt"
+        params:
+            flanking_region=config["flanking_region"],
+            routes=config["extra_route"]
+        shell:
+            """
+            {direc}/Scripts/step1_probes.sh {params.flanking_region} {params.routes}
+            """
+
+    rule creating_probes_creating_windows:
+        input:
+            regions=f"{direc}/Infor/probecreation/regions_probes.txt"
+        output:
+            f"{direc}/tracking_pipeline/windows_ready.txt"
+        threads:8
+        params:
+            probe_size=config["size_probes"],
+            overlap=config["overlap_probes"],
+            routes=config["extra_route"],
+            minimum_unique_sequence=config["min_uni_seq"]
+        shell:
+            """
+            cat {input.regions} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_windows.sh {{}} {params.probe_size} {params.overlap} {params.routes} {params.minimum_unique_sequence}
+            """
+
+    rule creating_probes_sorting_windows:
+        input:
+            f"{direc}/tracking_pipeline/windows_ready.txt",
+            cords=f"{direc}/Infor/allcoords.txt"
+        output:
+            f"{direc}/Infor/probecreation/allregions.txt"
+        shell:
+            """
+            {direc}/Scripts/sorting_windows.sh
+            """
+
+    rule creating_probes:
+        input:
+            f"{direc}/Infor/probecreation/allregions.txt"
+        output:
+            f"{direc}/Infor/probecreation/generated_probes.txt"
+        threads:8
+        params:
+            extra_region=config["extra_region"],
+            Main_reference=config["Ref"],
+            Secundary_reference=config["seq_ref"],
+            routes=config["extra_route"]
+        shell:
+            """
+            makeblastdb -in {params.Main_reference} -dbtype nucl
+            makeblastdb -in {params.Secundary_reference} -dbtype nucl
+            cat {input} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_probes.sh {{}} {params.extra_region} {params.Main_reference} {params.Secundary_reference} {params.routes}
+            """
+
+def set3_rules():
+    rule checking_sample_and_probes:
+        input:
+            ind=f"{direc}/Infor/Individuals.txt"
+        output:
+            touch("tracking_pipeline/merging_complete.txt"),
+            f"{direc}/tracking_pipeline/Download_fastq.txt",
+            f"{direc}/tracking_pipeline/statistics.txt",
+            f"{direc}/FileList.txt",
+            f"{direc}/tracking_pipeline/progress.txt",
+            f"{direc}/tracking_pipeline/failed_samples.txt",
+            f"{direc}/Infor/probecreation/regions_probes.txt",
+            f"{direc}/tracking_pipeline/windows_ready.txt",
+            f"{direc}/Infor/probecreation/allregions.txt",
+            f"{direc}/Infor/probecreation/generated_probes.txt",
+            completed=f"{direc}/tracking_pipeline/completed_samples.txt"
+        shell:
+            """
+            : > {output.completed}
+
+            while IFS= read -r s; do
+                echo "${{s}}" >> {output.completed}
+            done < {input.ind}
+
+            # Crear todos los archivos de salida como archivos vacíos
+            touch {output[0]}
+            touch {output[1]}
+            touch {output[2]}
+            touch {output[3]}
+            touch {output[4]}
+            touch {output[5]}
+            touch {output[6]}
+            touch {output[7]}
+            touch {output[8]}
+            touch {output[9]}
+            touch {output[10]}
+            """
 
 if option == "complete":
     set1_rules()
 elif option == "genotype":
     set2_rules()
+elif option == "genotype_wt_probes":
+    set3_rules()
 else:
     raise ValueError(f"Invalid option: {option}")
 
@@ -244,64 +341,6 @@ rule preparing_genotyping_inputs:
             end="$((bp2_2 + {params.flanking_region}))"
             echo -e "${{ID}}\tchr${{chr}}:${{start}}-${{end}}" >> {output.listaref}
         done
-        """
-
-rule created_probes_regions:
-    input:
-        cords=f"{direc}/Infor/allcoords.txt"
-    output:
-        f"{direc}/Infor/probecreation/regions_probes.txt"
-    params:
-        flanking_region=config["flanking_region"],
-        routes=config["extra_route"]
-    shell:
-        """
-        {direc}/Scripts/step1_probes.sh {params.flanking_region} {params.routes}
-        """
-
-rule creating_probes_creating_windows:
-    input:
-        regions=f"{direc}/Infor/probecreation/regions_probes.txt"
-    output:
-        f"{direc}/tracking_pipeline/windows_ready.txt"
-    threads:8
-    params:
-        probe_size=config["size_probes"],
-        overlap=config["overlap_probes"],
-        routes=config["extra_route"],
-        minimum_unique_sequence=config["min_uni_seq"]
-    shell:
-        """
-        cat {input.regions} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_windows.sh {{}} {params.probe_size} {params.overlap} {params.routes} {params.minimum_unique_sequence}
-        """
-
-rule creating_probes_sorting_windows:
-    input:
-        f"{direc}/tracking_pipeline/windows_ready.txt",
-        cords=f"{direc}/Infor/allcoords.txt"
-    output:
-        f"{direc}/Infor/probecreation/allregions.txt"
-    shell:
-        """
-        {direc}/Scripts/sorting_windows.sh
-        """
-
-rule creating_probes:
-    input:
-        f"{direc}/Infor/probecreation/allregions.txt"
-    output:
-        f"{direc}/Infor/probecreation/generated_probes.txt"
-    threads:8
-    params:
-        extra_region=config["extra_region"],
-        Main_reference=config["Ref"],
-        Secundary_reference=config["seq_ref"],
-        routes=config["extra_route"]
-    shell:
-        """
-        makeblastdb -in {params.Main_reference} -dbtype nucl
-        makeblastdb -in {params.Secundary_reference} -dbtype nucl
-        cat {input} | xargs -I {{}} -P {threads} {direc}/Scripts/generating_probes.sh {{}} {params.extra_region} {params.Main_reference} {params.Secundary_reference} {params.routes}
         """
 
 rule final_probes:
@@ -351,7 +390,10 @@ rule Genotyping:
         individuals=f"{direc}/tracking_pipeline/completed_samples.txt"
     output:
         f"{direc}/tracking_pipeline/genotyping_complete.txt"
-    threads: 8
+    resources:
+        runtime=3600, #24 hrs
+        mem_mb=16000
+    threads: 10
     params:
         local_analysis=config["local"],
         ftp_location=config["ftp_route"],
