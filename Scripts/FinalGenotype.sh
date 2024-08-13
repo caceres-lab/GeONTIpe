@@ -18,7 +18,13 @@ do
     if [ -f $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt ];then
       countStd="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | tail -n +2 | cut -f3 | grep -c "Std")"
       countInv="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | tail -n +2 | cut -f3 | grep -c "Inv")"
-      count="$((countStd+countInv))"
+      countAD="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | tail -n +2 | cut -f3 | grep -c "AD")"
+      countErr="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | tail -n +2 | cut -f3 | grep -c "Error")"
+      count="$((countStd+countInv+countAD+countErr))"
+
+      Genox="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | grep FinalGenotype | cut -f2)"
+
+      if [ $Genox != "Std\Inv" ];then
         if [ -d $wd/${i}/Genotyping/${inv}/SNP ];then
             if [ -f $wd/${i}/Genotyping/${inv}/SNP/${inv}_resolvedA.txt ] || [ -f $wd/${i}/Genotyping/${inv}/SNP/${inv}_resolvedD.txt ];then
                 if [ "$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | tail -n +2 | cut -f3 | grep -c "Std")" -ge 1 ];then
@@ -32,6 +38,9 @@ do
         else
           Geno="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | grep FinalGenotype | cut -f2)"
         fi
+      else
+        Geno="$(cat $wd/${i}/Genotyping/${inv}/${inv}_Genotype.txt | grep FinalGenotype | cut -f2)"
+      fi
     else
       Geno="ND"
       count=0
@@ -208,6 +217,3 @@ mv $wd/count.tmp $wd/Reads.txt
 rm "$wd/allgenos"*.tmp
 rm "$wd/allsvs"*.tmp
 rm "$wd/allreads"*.tmp
-
-
-
