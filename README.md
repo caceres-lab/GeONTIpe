@@ -51,18 +51,20 @@ Within each individual’s directory, there will again be a Genotyping directory
 Both outputs are shown here as examples.
 
 <div align="center">
+
 <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
 
-```plaintext
+<pre>
 Read	Dist	SignGT	ProbGeno
 0ee43437-b1c9-4d73-9f57-0419ff7525ff	Std	Std	
 10a3d390-28f0-4291-8553-a5ae61c7a7f9	Std	Std	
 118bd44d-a00b-4bd6-85c6-bfea8d297d33	Std	Std	
 1c262ba9-6b6c-48c9-9322-04bc5ea7426e	Std	Std	
 2333d74a-fa95-49ac-8637-cca73188082c	Std	Std	
+2347ce7d-e9cf-417e-b38b-91316657d4ec	Std	Std	
 FinalGenotype	Std		1
-``` |
 </pre>
+
 </div>
 
 ## Usage
