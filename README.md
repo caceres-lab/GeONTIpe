@@ -52,6 +52,8 @@ Both outputs are shown here as examples.
 
 <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/>
 
+[Inversion_Genotype.txt](https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035_Genotype.txt)
+
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
 
