@@ -60,19 +60,9 @@ Read	Dist	SignGT	ProbGeno
 118bd44d-a00b-4bd6-85c6-bfea8d297d33	Std	Std	
 1c262ba9-6b6c-48c9-9322-04bc5ea7426e	Std	Std	
 2333d74a-fa95-49ac-8637-cca73188082c	Std	Std	
-2347ce7d-e9cf-417e-b38b-91316657d4ec	Std	Std	
-27af50dd-e8fe-4d1c-b599-e7020e63dd5b	Std	Std	
-37a38fca-7cc2-40e8-95f7-760ac25742e6	Std	Std	
-41a97261-02e1-422e-b8d5-4a397c8a0b59	Std	Std	
-4d1fcc3a-00e2-48b5-b733-a72e59d167bc	Std	Std	
-5a829f2c-bc5f-4519-817a-d6b97a94fac6	Std	Std	
-5e345c18-9218-4c42-89ca-0b3d553dfadc	Std	Std	
-5e7b1dbd-7c1d-421a-9ebe-8d6992353472	Std	Std	
-6182a2d8-1cf1-4bf6-ab19-11b85a54784a	Std	Std	
-7354255c-1411-42dc-8044-2dd94dc63121	Std	Std	
-76218d15-365f-46ea-a8f8-0a8250ac4e9e	Std	Std	
 FinalGenotype	Std		1
 ``` |
+</pre>
 </div>
 
 ## Usage
