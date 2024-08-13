@@ -89,6 +89,7 @@ To execute the workflow, the first step is to access the config file to modify t
     "task": "megablast",
     "coverage_of_probes": 90,
     "identity_probe": 85,
+    "Ref_to_cram": "/main/route/Infor/Reference/reference_used_to_cram_creation",
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,
