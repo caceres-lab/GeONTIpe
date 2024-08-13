@@ -30,6 +30,7 @@ If you need to execute the entire pipeline (from downloading to genotyping), the
   - Std_ref.fa (reference genome to use, e.g., hg38)
   - t2t_ref.fa (T2T or other secondary reference genome)
   - All_snp.vcf.gz (SNPs used in the analysis)
+  - Ref.fa (reference used when cram file is used)
 
 ### Inputs for Using Pre-Mapped Files
 If mapped files are already available, either locally or on an FTP server, you do not need ListaTodos.txt. Instead, provide:
@@ -48,6 +49,8 @@ Within each individual’s directory, there will again be a Genotyping directory
   - Inversion.png: An image displaying the reads and the generated probes.
   - Inversion_Genotype.txt: A file with information on each read and its respective genotype.
 Both outputs are shown here as examples.
+
+![Inversion.png](https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png)
 
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
