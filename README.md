@@ -72,7 +72,8 @@ Read	Dist	SignGT	ProbGeno
 7354255c-1411-42dc-8044-2dd94dc63121	Std	Std	
 76218d15-365f-46ea-a8f8-0a8250ac4e9e	Std	Std	
 FinalGenotype	Std		1
-```
+``` |
+</div>
 
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
