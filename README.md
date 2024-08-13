@@ -50,8 +50,7 @@ Within each individual’s directory, there will again be a Genotyping directory
   - Inversion_Genotype.txt: A file with information on each read and its respective genotype.
 Both outputs are shown here as examples.
 
-| Image | Genotype|
-| <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> | 
+<img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
 
 ```plaintext
 Read	Dist	SignGT	ProbGeno
@@ -71,21 +70,6 @@ Read	Dist	SignGT	ProbGeno
 6182a2d8-1cf1-4bf6-ab19-11b85a54784a	Std	Std	
 7354255c-1411-42dc-8044-2dd94dc63121	Std	Std	
 76218d15-365f-46ea-a8f8-0a8250ac4e9e	Std	Std	
-86e55b6f-f901-49b1-8745-517def763d99	Std	Std	
-8f4d9b4d-6e6a-457c-9978-519eb01e16cc	Std	Std	
-9bbff0f0-b523-41e2-b7ca-72517a1db3b1	Std	Std	
-a86db99a-6a1d-40a9-b2e3-af349ea8d149	Std	Std	
-abd10e7d-2a52-45f6-b9e6-799cb23fceae	Std	Std	
-bc882571-11c2-43c4-bc8f-7fe8c3c13a84	Std	Std	
-c254af39-5881-4030-a926-ef7914e9c177	Std	Std	
-c88a592f-d59e-4867-808c-56c79e689b22	Std	Std	
-d5a96459-d0ed-4180-8222-3f9fe1fce7e3	Std	Std	
-dc4de944-e2b1-4a3e-9730-531410e2a47f	Std	Std	
-e508c28c-0c94-49c0-b995-43f394baf744	Std	Std	
-e6437356-54b2-4c8c-9263-4e47632d580e	Std	Std	
-eb44b2db-c36d-4ed6-b282-971809e85478	Std	Std	
-f44ee506-7173-4d36-9816-782aaf516a79	Std	Std	
-f647c213-ba9e-4477-ab6d-4f1cd30dc1b1	Std	Std	
 FinalGenotype	Std		1
 ``` |
 
