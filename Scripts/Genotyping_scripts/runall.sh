@@ -7,6 +7,7 @@ invs="$(cut -f1 $wd/../../Infor/ListaRef.txt)"
 ind=$2
 local=$3
 route=$4
+ref_cram=${19}
 
 samplgender="$(cat $wd/../../Infor/gender | grep $ind[[:space:]] | cut -f2 | tr -d '\r')"
 
@@ -15,8 +16,6 @@ if [ $samplgender == "Women" ];then
 elif [ $samplgender == "Men" ];then
   gender="M"
 fi
-
-echo ${gender}
 
 if [ $local == Y ];then
   if [ -f "$wd/../../../cosas/"$ind"/hg38/"$ind".bam" ] && [ -f "$wd/../Descargas/Resultados/mappeo/"$ind".bam" ]; then
@@ -63,7 +62,7 @@ do
 		samtools merge $wd/$inv/${inv}.bam $wd/$inv/${inv}_1.bam $wd/$inv/${inv}_2.bam
 		samtools index $wd/$inv/$inv.bam > $wd/$inv/$inv.bam.bai
 	else
-		samtools view -b $initBam "$selInv" > $wd/$inv/${inv}.bam
+		samtools view -T $ref_cram -b $initBam "$selInv" > $wd/$inv/${inv}.bam
 		samtools index $wd/$inv/$inv.bam > $wd/$inv/$inv.bam.bai
 	fi
   

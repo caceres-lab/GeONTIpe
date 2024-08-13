@@ -7,7 +7,7 @@ inputs <- commandArgs(T)
 inv <- inputs[2]
 gender <- inputs[3]
 minor_al <- as.numeric(inputs[4])
-low_con <- as.numeric(inputs[5])
+min_low_con <- as.numeric(inputs[5])
 diff_exp <- as.numeric(inputs[6])
 min_sv <- as.numeric(inputs[7])
 splitting_svs <- as.numeric(inputs[8])

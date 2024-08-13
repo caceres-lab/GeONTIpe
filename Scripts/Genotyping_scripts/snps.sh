@@ -93,11 +93,8 @@ fi
 ### Select positions of mpileup with selected variants
 
 >$wd/$inv/SNP/variante${inv}
-  
-  for snp in $(cat $wd/$inv/SNP/snps${inv}.txt | cut -f2)
-  do
-    cat $wd/$inv/SNP/mpileup${inv}.txt | grep "[[:space:]]$snp[[:space:]]" | cut -f2,3,5,7 >> $wd/$inv/SNP/variante${inv}
-  done
+
+awk 'NR==FNR { snps[$2]; next } $2 in snps { print $2, $3, $5, $7 }' $wd/$inv/SNP/snps${inv}.txt $wd/$inv/SNP/mpileup${inv}.txt | sed 's/ /\t/g' > $wd/$inv/SNP/variante${inv}
 
 #rm $wd/$inv/SNP/mpileup${inv}.txt
 

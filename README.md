@@ -141,7 +141,6 @@ Here is an explanation of the function of some adjustable parameters:
   - Task: Parameter -task for blast. (Default: megablast)
   - Coverage_of_probes: Parameter -qcov_hsp_perc for blast. (Default: 90)
   - Identity_probe: Parameter -perc_identity for blast. (Default: 85)
-  - Major_allele_proportion: Proportion of reads with the same orientation to consider as a unique allele. (Default: 0.85)
   - Minor_allele_proportion: Proportion of reads of the minor allele required to be considered a real allele. (Default: 0.15)
   - Low_confidence_proportion: Proportion of reads of the minor allele to consider inconclusive genotypes. Used together with Minor_allele_proportion for inconclusive genotype thresholds. If low_confidence_proportion is the same value as minor_allele_proportion, not low-confident genotypes will be generated (Default: 0.05)
   - Difference_respect_expected: Minimum percentage difference to consider an additional structural variant. Higher values are needed for reads with more errors.(Default: 0.05)

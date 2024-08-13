@@ -20,10 +20,10 @@
     "Mapq_filter": 20,
     
     ## Creating input to genotypes and probes
-    "flanking_region": 20000,
+    "flanking_region": 100000,
     "extra_region": 500000,
     "size_probes": 300,
-    "overlap_probes": 100,
+    "overlap_probes": 275,
     "seq_ref": "/scratch/rmoreira/Infor/Reference/chm13v2.0.fa",
     "extra_route": "/scratch/rmoreira/Infor/Reference",
     "min_uni_seq": 50,
@@ -33,7 +33,7 @@
     "ftp_route": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1KG_ONT_VIENNA/hg38",
     "task": "blastn",
     "coverage_of_probes": 90,
-    "identity_probe": 80,
+    "identity_probe": 85,
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,
