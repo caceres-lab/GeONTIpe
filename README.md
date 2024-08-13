@@ -50,7 +50,6 @@ Within each individual’s directory, there will again be a Genotyping directory
   - Inversion_Genotype.txt: A file with information on each read and its respective genotype.
 Both outputs are shown here as examples.
 
-| Imagen | Datos |
 |--------|-------|
 | <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> | ```plaintext
 Read	Dist	SignGT	ProbGeno
@@ -87,7 +86,6 @@ f44ee506-7173-4d36-9816-782aaf516a79	Std	Std
 f647c213-ba9e-4477-ab6d-4f1cd30dc1b1	Std	Std	
 FinalGenotype	Std		1
 ``` |
-
 
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
