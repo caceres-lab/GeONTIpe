@@ -52,8 +52,9 @@ Both outputs are shown here as examples.
 
 | Imagen | Datos |
 |--------|-------|
-| <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
-| ```plaintext
+| <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> | 
+
+```plaintext
 Read	Dist	SignGT	ProbGeno
 0ee43437-b1c9-4d73-9f57-0419ff7525ff	Std	Std	
 10a3d390-28f0-4291-8553-a5ae61c7a7f9	Std	Std	
