@@ -21,7 +21,7 @@ conda activate Inversiones
 ## Inputs
 ### Inputs for Running the Complete Pipeline
 If you need to execute the entire pipeline (from downloading to genotyping), the required inputs are:
-  - Allcoords.txt: Specifies the inversions to be tested. Each column must be tab-separated and include: Inv_ID, chromosome, BP1_start, BP1_end, BP2_start, BP2_end (chromosome should be 1, 2, ..., X, Y).
+  - coords.txt: Specifies the inversions to be tested. Each column must be tab-separated and include: Inv_ID, chromosome, BP1_start, BP1_end, BP2_start, BP2_end (chromosome should be 1, 2, ..., X, Y).
   - ListaTodos.txt: Contains all individuals with their respective URLs for downloading the necessary data in FASTQ or FASTA format. Must be tab-separated with the format: Individual, URL (if there are multiple URLs per individual, each URL should be associated with the same individual).
   - gender: Provides the sex of each sample, separated by a tab: Sample, sex (Women/Men).
   - conversion.txt: Converts chromosome names, e.g., chr1, chr2, ... (modifiable based on the reference genome used and its chromosome names).
@@ -125,6 +125,7 @@ Here is an explanation of the function of some adjustable parameters:
   - Option: Determines the steps of the workflow. Options:
     - "complete": Full workflow from download to genotype.
     - "genotype": Genotype inversions using existing BAM files.
+    - "genotype_wt_probes": Genotype inversions using existing BAM files and using designed probes.
   - Number_of_splits: This parameter determines how many fragments each downloaded file will be divided. If you have limited RAM and prefer to launch many jobs simultaneously, it's preferable to increase this number. Conversely, if you have ample RAM, you can set this parameter to 1 to map the entire file without splitting it (Default: 30).
   - Quality_reads: Minimum quality threshold required for reads to pass filtering. (Default: 7)
   - Read_length: Minimum desired length of reads in base pairs. (Default: 5000)
@@ -153,8 +154,6 @@ Here is an explanation of the function of some adjustable parameters:
 
 These parameters can be adjusted in the config file according to your specific data and analysis needs.
 
-## Contributors
-YO
-
 ## How to cite
-Ricardo Moreira-Pinhal, Konstantinos Karakostis, Illya Yakymenko, Oscar Conchillo, Maria Díaz-Ros, Andrés Santos, Miquel Àngel Senar, Jaime Martínez-Urtaza, Marta Puig, Mario Cáceres, Complete characterization of human polymorphic inversions and other complex variants from long read data, a saber cuando y a saber donde se publica esto
+Ricardo Moreira-Pinhal, Konstantinos Karakostis, Illya Yakymenko, Oscar Conchillo, Maria Díaz-Ros, Andrés Santos, Miquel Àngel Senar, Jaime Martínez-Urtaza, Marta Puig, Mario Cáceres, Complete characterization of human polymorphic inversions and other complex variants from long read data.
+
