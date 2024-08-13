@@ -410,10 +410,11 @@ rule Genotyping:
         Q_base=config["Quality_by_base"],
         Min_freq=config["Min_freq_snps"],
         Min_cov=config["Min_coverage"],
-        Dist_tree=config["Distance_of_tree"]
+        Dist_tree=config["Distance_of_tree"],
+        Ref_to_cram=config["Ref_to_cram"]
     shell:
         """
-        cat {input.individuals} | xargs -I {{}} -P {threads} bash -c '{direc}/{{}}/Genotyping/runall.sh {direc}/{{}}/Genotyping {{}} {params.local_analysis} {params.ftp_location} {params.task} {params.cov_probes} {params.ID_prob} {params.Minor_prop} {params.Low_conf_prop} {params.Per_size_diff} {params.Min_SV} {params.Split_SV} {params.SNP_file} {params.Ref_file} {params.Q_base} {params.Min_freq} {params.Min_cov} {params.Dist_tree}
+        cat {input.individuals} | xargs -I {{}} -P {threads} bash -c '{direc}/{{}}/Genotyping/runall.sh {direc}/{{}}/Genotyping {{}} {params.local_analysis} {params.ftp_location} {params.task} {params.cov_probes} {params.ID_prob} {params.Minor_prop} {params.Low_conf_prop} {params.Per_size_diff} {params.Min_SV} {params.Split_SV} {params.SNP_file} {params.Ref_file} {params.Q_base} {params.Min_freq} {params.Min_cov} {params.Dist_tree} {params.Ref_to_cram}
         touch {output}'
         """
 

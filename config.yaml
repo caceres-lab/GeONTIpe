@@ -1,6 +1,6 @@
 {
     ## Execution options
-    "option": "genotype_wt_probes",
+    "option": "genotype",
 
     ## Directories
     "directory": "/scratch/rmoreira",
@@ -26,7 +26,7 @@
     "overlap_probes": 275,
     "seq_ref": "/scratch/rmoreira/Infor/Reference/chm13v2.0.fa",
     "extra_route": "/scratch/rmoreira/Infor/Reference",
-    "min_uni_seq": 50,
+    "min_uni_seq": 0,
 
     ## Genotyping inversions
     "local": "N",
@@ -34,6 +34,7 @@
     "task": "blastn",
     "coverage_of_probes": 90,
     "identity_probe": 85,
+    "Ref_to_cram": "/g/impont/ref/hg38.fa",
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,
