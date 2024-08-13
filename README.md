@@ -92,7 +92,7 @@ To execute the workflow, the first step is to access the config file to modify t
 
     ## Genotype classification
     "Minor_allele_proportion": 0.15,
-    "Low_confidence_proportion": 0.06,
+    "Low_confidence_proportion": 0.05,
 
     ## Alternative SVs classification
     "Difference_respect_expected": 0.05,
