@@ -52,7 +52,40 @@ Both outputs are shown here as examples.
 
 <img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/>
 
-[Inversion_Genotype.txt](https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035_Genotype.txt)
+```plaintext
+Read	Dist	SignGT	ProbGeno
+0ee43437-b1c9-4d73-9f57-0419ff7525ff	Std	Std	
+10a3d390-28f0-4291-8553-a5ae61c7a7f9	Std	Std	
+118bd44d-a00b-4bd6-85c6-bfea8d297d33	Std	Std	
+1c262ba9-6b6c-48c9-9322-04bc5ea7426e	Std	Std	
+2333d74a-fa95-49ac-8637-cca73188082c	Std	Std	
+2347ce7d-e9cf-417e-b38b-91316657d4ec	Std	Std	
+27af50dd-e8fe-4d1c-b599-e7020e63dd5b	Std	Std	
+37a38fca-7cc2-40e8-95f7-760ac25742e6	Std	Std	
+41a97261-02e1-422e-b8d5-4a397c8a0b59	Std	Std	
+4d1fcc3a-00e2-48b5-b733-a72e59d167bc	Std	Std	
+5a829f2c-bc5f-4519-817a-d6b97a94fac6	Std	Std	
+5e345c18-9218-4c42-89ca-0b3d553dfadc	Std	Std	
+5e7b1dbd-7c1d-421a-9ebe-8d6992353472	Std	Std	
+6182a2d8-1cf1-4bf6-ab19-11b85a54784a	Std	Std	
+7354255c-1411-42dc-8044-2dd94dc63121	Std	Std	
+76218d15-365f-46ea-a8f8-0a8250ac4e9e	Std	Std	
+86e55b6f-f901-49b1-8745-517def763d99	Std	Std	
+8f4d9b4d-6e6a-457c-9978-519eb01e16cc	Std	Std	
+9bbff0f0-b523-41e2-b7ca-72517a1db3b1	Std	Std	
+a86db99a-6a1d-40a9-b2e3-af349ea8d149	Std	Std	
+abd10e7d-2a52-45f6-b9e6-799cb23fceae	Std	Std	
+bc882571-11c2-43c4-bc8f-7fe8c3c13a84	Std	Std	
+c254af39-5881-4030-a926-ef7914e9c177	Std	Std	
+c88a592f-d59e-4867-808c-56c79e689b22	Std	Std	
+d5a96459-d0ed-4180-8222-3f9fe1fce7e3	Std	Std	
+dc4de944-e2b1-4a3e-9730-531410e2a47f	Std	Std	
+e508c28c-0c94-49c0-b995-43f394baf744	Std	Std	
+e6437356-54b2-4c8c-9263-4e47632d580e	Std	Std	
+eb44b2db-c36d-4ed6-b282-971809e85478	Std	Std	
+f44ee506-7173-4d36-9816-782aaf516a79	Std	Std	
+f647c213-ba9e-4477-ab6d-4f1cd30dc1b1	Std	Std	
+FinalGenotype	Std		1
 
 ## Usage
 To execute the workflow, the first step is to access the config file to modify the main directory paths:
