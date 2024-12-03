@@ -55,7 +55,7 @@ Both outputs are shown here as examples.
 <img src="https://github.com/RMoreiraP/GeONTIpe/blob/main/example/HG00268/Genotyping/HsInv0030/HsInv0030.png" alt="Inversion.png" width="400"/> 
 
 <pre>
-Read  Dist  SignGT
+Read                                 Dist SignGT
 0c959a3f-1c92-4e65-b969-77294ff73ca3 Std Std
 0d67da87-4f4b-4fcd-b0fd-ef4d2a5301a7 Inv Inv
 10893ceb-b06e-4d31-a606-b97fe38d517e Std Std
@@ -65,7 +65,7 @@ Read  Dist  SignGT
 2d1dc5de-0706-4176-b11c-98af1efea68a Inv Inv
 3c804d89-06b6-46e3-8680-2ab1baf1bb7b Std Std
 4663e871-7b44-46e3-a0c2-a1b219b688bf Inv Inv
-Final_Genotype Std/Inv
+Final_Genotype                       Std/Inv
 </pre>
 
 </div>
