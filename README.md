@@ -65,7 +65,7 @@ Read	Dist	SignGT	ProbGeno
 2d1dc5de-0706-4176-b11c-98af1efea68a	Inv	Inv	
 3c804d89-06b6-46e3-8680-2ab1baf1bb7b	Std	Std	
 4663e871-7b44-46e3-a0c2-a1b219b688bf	Inv	Inv
-Final_Genotype  Het
+Final_Genotype  Std/Inv
 </pre>
 
 </div>
