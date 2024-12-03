@@ -1,8 +1,8 @@
-# GeONType
+# GeONTIpe
 A Snakemake workflow to genotype inversions and to discover structural variants using Oxford Nanopore Long Reads 
 
 ## Pipeline Overview
-GeONType is a Snakemake workflow designed to genotype inversions, specifically those mediated by inverted repeats, using Oxford Nanopore long reads. The pipeline encompasses various steps, from sample downloading to inversion genotyping. It employs a range of software tools and custom scripts. The core concept in genotyping involves capturing reads that span the inversion breakpoints and determining their orientation through probe blasting. 
+GeONTIpe is a Snakemake workflow designed to genotype inversions, specifically those mediated by inverted repeats, using Oxford Nanopore long reads. The pipeline encompasses various steps, from sample downloading to inversion genotyping. It employs a range of software tools and custom scripts. The core concept in genotyping involves capturing reads that span the inversion breakpoints and determining their orientation through probe blasting. 
 Despite the pipeline's initial purpose, it can also be used for:
   - Genotyping inversions not mediated by inverted repeats (previous creation of artificial inverted repeats of X bp around the breakpoints of the inversion)
   - Using PacBio reads (adjusting parameters to improve performance)
@@ -13,8 +13,8 @@ For the proper functioning of this workflow, a config.yaml file is included for 
 ## Installation
 To run snakefile locally you must have execute:
 ```
-git clone https://github.com/RMoreiraP/GeONType
-cd GeONType
+git clone https://github.com/RMoreiraP/GeONTIpe
+cd GeONTIpe
 conda env create -f environment/Inversiones.yml
 conda activate Inversiones
 ```
@@ -52,7 +52,7 @@ Both outputs are shown here as examples.
 
 <div align="center">
 
-<img src="https://github.com/RMoreiraP/GeONType/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
+<img src="https://github.com/RMoreiraP/GeONTIpe/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
 
 <pre>
 Read	Dist	SignGT	ProbGeno
