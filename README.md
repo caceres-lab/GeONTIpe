@@ -52,17 +52,20 @@ Both outputs are shown here as examples.
 
 <div align="center">
 
-<img src="https://github.com/RMoreiraP/GeONTIpe/blob/main/example/HG00096/Genotyping/INV00000035/INV00000035.png" alt="Inversion.png" width="400"/> 
+<img src="https://github.com/RMoreiraP/GeONTIpe/blob/main/example/HG00268/Genotyping/HsInv0030/HsInv0030.png" alt="Inversion.png" width="400"/> 
 
 <pre>
 Read	Dist	SignGT	ProbGeno
-0ee43437-b1c9-4d73-9f57-0419ff7525ff	Std	Std	
-10a3d390-28f0-4291-8553-a5ae61c7a7f9	Std	Std	
-118bd44d-a00b-4bd6-85c6-bfea8d297d33	Std	Std	
-1c262ba9-6b6c-48c9-9322-04bc5ea7426e	Std	Std	
-2333d74a-fa95-49ac-8637-cca73188082c	Std	Std	
-2347ce7d-e9cf-417e-b38b-91316657d4ec	Std	Std	
-FinalGenotype	Std		1
+0c959a3f-1c92-4e65-b969-77294ff73ca3	Std	Std	
+0d67da87-4f4b-4fcd-b0fd-ef4d2a5301a7	Inv	Inv	
+10893ceb-b06e-4d31-a606-b97fe38d517e	Std	Std	
+1e7831f0-8318-4e6d-be95-0c68d461ae1c	Inv	Inv	
+206c95fa-891c-424e-a4a9-f4086bae3449	Std	Std	
+20b1325f-8c1c-402d-946e-f3ad57b662ed	Std	Std	
+2d1dc5de-0706-4176-b11c-98af1efea68a	Inv	Inv	
+3c804d89-06b6-46e3-8680-2ab1baf1bb7b	Std	Std	
+4663e871-7b44-46e3-a0c2-a1b219b688bf	Inv	Inv
+Final_Genotype  Het
 </pre>
 
 </div>
