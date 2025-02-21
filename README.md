@@ -24,7 +24,7 @@ If you need to execute the entire pipeline (from downloading to genotyping), the
   - coords.txt: Specifies the inversions to be tested. Each column must be tab-separated and include: Inv_ID, chromosome, BP1_start, BP1_end, BP2_start, BP2_end (chromosome should be 1, 2, ..., X, Y).
   - ListaTodos.txt: Contains all individuals with their respective URLs for downloading the necessary data in FASTQ or FASTA format. Must be tab-separated with the format: Individual, URL (if there are multiple URLs per individual, each URL should be associated with the same individual).
   - gender: Provides the sex of each sample, separated by a tab: Sample, sex (Women/Men).
-  - conversion.txt: File provided when there are differences in chromosome names between the reference genomes used and to specify the total chromosome size. It should contain three columns: the first with the chromosome name from the reference genome not used for mapping, the second with the chromosome name from the genome used for mapping, and the third with the chromosome size.
+  - conversion.txt: File provided when there are differences in chromosome names between the reference genomes used and to specify the total chromosome size. It should contain three columns: the first with the chromosome name from the reference genome not used for mapping, the second with the chromosome name from the genome used for mapping (which can be the same as the first column if the names are equal), and the third with the chromosome size.
 
 ### References:
   - Std_ref.fa (reference genome to use, e.g., hg38)
