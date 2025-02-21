@@ -10,8 +10,8 @@ wd="$(pwd)/$ind/Genotyping"
 
 initBam="$wd/$inv/${inv}.bam"
 
-> $wd/Snps_review.txt
-> $wd/snp_resolution.txt
+touch $wd/Snps_review.txt
+touch $wd/snp_resolution.txt
 
 if [ -f $wd/$inv/SNP/SNPs_${inv}.png ]; then 
   continue
