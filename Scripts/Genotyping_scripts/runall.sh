@@ -11,10 +11,18 @@ ref_cram=${19}
 
 samplgender="$(cat $wd/../../Infor/gender | grep $ind[[:space:]] | cut -f2 | tr -d '\r')"
 
-if [ $samplgender == "Women" ];then
+if [ -z "$samplegender" ]; then
+  echo "Error: No sample sex" >&2
+  exit 1
+fi
+
+if [ "$samplegender" == "Women" ]; then
   gender="W"
-elif [ $samplgender == "Men" ];then
+elif [ "$samplegender" == "Men" ]; then
   gender="M"
+else
+  echo "Error: Invalid sample sex" >&2
+  exit 1
 fi
 
 if [ $local == Y ];then
