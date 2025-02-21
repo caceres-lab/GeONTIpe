@@ -78,7 +78,7 @@ elif [ $ind == "HG007" ];then
 fi
 
 
-if [[ $(bcftools view -h "http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_raw_GT_with_annot/20201028_CCDG_14151_B01_GRM_WGS_2020-08-05_${chrs}.recalibrated_variants.vcf.gz" | grep -c "${ind}") == 1 ]]; then
+if [[ $(bcftools view -h "http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_raw_GT_with_annot/20201028_CCDG_14151_B01_GRM_WGS_2020-08-05_${chrs}.recalibrated_variants.vcf.gz" | grep -w -c "${ind}") == 1 ]]; then
   bcftools view -H -r ${chrs}:$pos1-$pos2 -s "${ind}" http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_raw_GT_with_annot/20201028_CCDG_14151_B01_GRM_WGS_2020-08-05_${chrs}.recalibrated_variants.vcf.gz | cut -f2,10 | sed 's/:/\t/g' | cut -f1-2 | grep "0/1" | cut -f1 > $wd/$inv/SNP/snps1000GP${inv}.txt
 fi
 
