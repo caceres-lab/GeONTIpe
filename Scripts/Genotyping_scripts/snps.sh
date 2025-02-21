@@ -56,7 +56,18 @@ else
 ### See the bases of X quality on the regions selected in map file
 
   samtools mpileup --no-BAQ -f $ref -Q $quality --output-QNAME $initBam > $wd/$inv/SNP/mpileup${inv}.txt
-  
+
+    bases_mpileup="$(cut -f3 "$wd/$inv/SNP/mpileup${inv}.txt" | sort -u | wc -l)"
+
+  if [ "$bases_mpileup" -eq 1 ]; then
+   b_mpip="$(cut -f3 "$wd/$inv/SNP/mpileup${inv}.txt" | sort -u)"
+
+   if [ "$b_mpip" = "N" ]; then
+    echo "Error: Bad mpileup execution: assure chromosome name is correct" >&2
+    exit 1
+   fi
+ fi
+ 
 #### Check if sample exists in 1000 Genome project
 
   chrs="$(echo chr${chr})"
