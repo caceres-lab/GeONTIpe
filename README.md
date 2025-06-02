@@ -175,5 +175,5 @@ Here is an explanation of the function of some adjustable parameters:
 These parameters can be adjusted in the config file according to your specific data and analysis needs.
 
 ## How to cite
-Ricardo Moreira-Pinhal, Konstantinos Karakostis, Illya Yakymenko, Oscar Conchillo, Maria Díaz-Ros, Andrés Santos, Miquel Àngel Senar, Jaime Martínez-Urtaza, Marta Puig, Mario Cáceres, Complete characterization of human polymorphic inversions and other complex variants from long read data.
+Ricardo Moreira-Pinhal, Konstantinos Karakostis, Illya Yakymenko, Oscar Conchillo, Maria Díaz-Ros, Andrés Santos, Miquel Àngel Senar, Jaime Martínez-Urtaza, Marta Puig, Mario Cáceres.2025."Resolving the full set of human polymorphic inversions and other complex variants from ultra-long read data". bioRxiv 2025.05.27.656315; doi: https://doi.org/10.1101/2025.05.27.656315
 
